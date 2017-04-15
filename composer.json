@@ -1,0 +1,25 @@
+{
+  "name": "leantony/laravel-html",
+  "description": "Re-usable, custom html components created on the server and rendered on client side",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "leantony",
+      "email": "chachaantony@gmail.com"
+    }
+  ],
+  "require": {
+    "illuminate/view": "~5.1",
+    "illuminate/support": "~5.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~5.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Leantony\\Html\\": "src/",
+      "Leantony\\Html\\Components\\": "src/html",
+      "Leantony\\Html\\Providers\\": "src/providers"
+    }
+  }
+}
