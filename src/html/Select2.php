@@ -50,7 +50,7 @@ class Select2 implements Htmlable
      */
     public function render($smallSize = [4, 8], $largeSize = [2, 10])
     {
-        return view('partials.select2', [
+        return view('leantony::html.select2', [
             'sm' => $smallSize,
             'lg' => $largeSize,
             'for' => $this->getFor(),

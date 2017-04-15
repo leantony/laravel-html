@@ -66,7 +66,7 @@ class FineUploader implements Htmlable
      */
     public function render()
     {
-        return view('partials.upload_files', [
+        return view('leantony::html.upload_files', [
             'multiple' => $this->getMultiple(),
             'upload_rules' => json_encode($this->getUploadRules()),
             'itemLimit' => $this->getUploadRules()['itemLimit'],
@@ -122,7 +122,11 @@ class FineUploader implements Htmlable
      */
     public function getUploadRules()
     {
-        return $this->uploadRules;
+        $rules = $this->uploadRules;
+        $uploadRules['sizeLimit'] = array_get($rules, 'sizeLimit', 2) * 1024;
+        $uploadRules['itemLimit'] = array_get($rules, 'itemLimit', 10);
+        $uploadRules['allowedExtensions'] = array_get($rules, 'allowedExtensions', ['jpeg', 'jpg', 'png']);
+        return $rules;
     }
 
     /**
@@ -131,9 +135,6 @@ class FineUploader implements Htmlable
      */
     public function setUploadRules($uploadRules)
     {
-        $uploadRules['sizeLimit'] = array_get($uploadRules, 'sizeLimit', 2) * 1024;
-        $uploadRules['itemLimit'] = array_get($uploadRules, 'itemLimit', 10);
-        $uploadRules['allowedExtensions'] = array_get($uploadRules, 'allowedExtensions', ['jpeg', 'jpg', 'png']) * 1024;
         $this->uploadRules = $uploadRules;
         return $this;
     }
@@ -221,11 +222,11 @@ class FineUploader implements Htmlable
      */
     public function toHtml()
     {
-        return $this->__toString();
+        return $this->render();
     }
 
     public function __toString()
     {
-        return $this->render();
+        return $this->toHtml();
     }
 }

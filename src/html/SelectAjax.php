@@ -90,7 +90,7 @@ class SelectAjax extends Select2
      */
     public function render($smallSize = [4, 8], $largeSize = [2, 10])
     {
-        return view('partials.select2-ajax', [
+        return view('leantony::html.select2-ajax', [
             'sm' => $smallSize,
             'lg' => $largeSize,
             'for' => $this->getFor(),
