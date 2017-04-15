@@ -96,7 +96,7 @@ class SelectAjax extends Select2
             'for' => $this->getFor(),
             'name' => $this->getName(),
             'data' => $this->getData(),
-            'data_values' => $this->getDataValues(),
+            'data_values' => $this->getInitialData(),
             'multiple' => $this->getIsMultiple(),
             'keyAttribute' => $this->getKeyAttribute(),
             'valueAttribute' => $this->getValueAttribute(),

@@ -21,7 +21,7 @@ class Select2 implements Htmlable
     public $name;
 
     /**
-     * The data that is to be prefilled on the select2 input
+     * Available data
      *
      * @var array
      */
@@ -35,11 +35,11 @@ class Select2 implements Htmlable
     public $isMultiple = true;
 
     /**
-     * All data that did not exist in $data
+     * Data that needs to be pre-selected
      *
      * @var array
      */
-    public $dataValues = [];
+    public $initialData = [];
 
     /**
      * Render the select2 box
@@ -56,7 +56,7 @@ class Select2 implements Htmlable
             'for' => $this->getFor(),
             'name' => $this->getName(),
             'data' => $this->getData(),
-            'data_values' => $this->getDataValues(),
+            'data_values' => $this->getInitialData(),
             'multiple' => $this->getIsMultiple(),
         ])->render();
     }
@@ -138,18 +138,18 @@ class Select2 implements Htmlable
     /**
      * @return mixed
      */
-    public function getDataValues()
+    public function getInitialData()
     {
-        return json_encode($this->dataValues);
+        return json_encode($this->initialData);
     }
 
     /**
-     * @param mixed $dataValues
+     * @param mixed $data
      * @return Select2
      */
-    public function setDataValues($dataValues)
+    public function setInitialData($data)
     {
-        $this->dataValues = $dataValues;
+        $this->initialData = $data;
         return $this;
     }
 
