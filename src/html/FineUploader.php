@@ -123,9 +123,9 @@ class FineUploader implements Htmlable
     public function getUploadRules()
     {
         $rules = $this->uploadRules;
-        $uploadRules['sizeLimit'] = array_get($rules, 'sizeLimit', 2) * 1024;
-        $uploadRules['itemLimit'] = array_get($rules, 'itemLimit', 10);
-        $uploadRules['allowedExtensions'] = array_get($rules, 'allowedExtensions', ['jpeg', 'jpg', 'png']);
+        $rules['sizeLimit'] = array_get($rules, 'sizeLimit', 2) * 1024 * 1024;
+        $rules['itemLimit'] = array_get($rules, 'itemLimit', 10);
+        $rules['allowedExtensions'] = array_get($rules, 'allowedExtensions', ['jpeg', 'jpg', 'png']);
         return $rules;
     }
 
