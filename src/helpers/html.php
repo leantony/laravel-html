@@ -54,6 +54,27 @@ if (!function_exists('bool_options')) {
     }
 }
 
+if (!function_exists('bool_to_str')) {
+
+    /**
+     * Return a string representation of the bool value
+     *
+     * @param $value
+     * @param array $return_text
+     * @return mixed
+     */
+    function bool_to_str($value, $return_text = ['Yes', 'No'])
+    {
+        if (!is_array($return_text)) {
+            return false;
+        }
+        if ($value) {
+            return $return_text[0];
+        }
+        return $return_text[1];
+    }
+}
+
 if (!function_exists('valid_instance')) {
 
     /**
