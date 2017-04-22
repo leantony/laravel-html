@@ -101,6 +101,7 @@ class SelectAjax extends Select2
             'keyAttribute' => $this->getKeyAttribute(),
             'valueAttribute' => $this->getValueAttribute(),
             'url' => $this->getTargetUrl(),
+            'tags' => $this->isTags(),
         ])->render();
     }
 }

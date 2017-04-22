@@ -7,6 +7,13 @@ use Illuminate\Contracts\Support\Htmlable;
 class Select2 implements Htmlable
 {
     /**
+     * Support tags
+     *
+     * @var bool
+     */
+    public $tags = false;
+
+    /**
      * The variable name
      *
      * @var string
@@ -59,6 +66,24 @@ class Select2 implements Htmlable
             'data_values' => $this->getInitialData(),
             'multiple' => $this->getIsMultiple(),
         ])->render();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isTags()
+    {
+        return $this->tags;
+    }
+
+    /**
+     * @param bool $tags
+     * @return Select2
+     */
+    public function setTags($tags)
+    {
+        $this->tags = $tags;
+        return $this;
     }
 
     /**
