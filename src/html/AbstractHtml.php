@@ -1,6 +1,6 @@
 <?php
 
-namespace Leantony\html;
+namespace Leantony\Html;
 
 use Illuminate\Contracts\Support\Htmlable;
 

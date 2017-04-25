@@ -2,7 +2,7 @@
 
 namespace Leantony\Html\Tables;
 
-use Leantony\html\AbstractHtml;
+use Leantony\Html\AbstractHtml;
 
 abstract class Table extends AbstractHtml
 {
