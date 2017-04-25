@@ -134,10 +134,10 @@ if (!function_exists('like')) {
      * Surround keyword with '%', for a like query
      *
      * @param $q
-     * @param array $pattern
+     * @param $pattern
      * @return string
      */
-    function like($q, $pattern = ["%q%"])
+    function like($q, $pattern = "%q%")
     {
         return str_replace("q", $q, $pattern);
     }
