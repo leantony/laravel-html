@@ -5,7 +5,11 @@
             @if($loop->first)
                 <th class="min-width nowrap">{{ $v }}</th>
             @else
-                <th>{{ $v }}</th>
+                @if(is_callable($v))
+                    {!! call_user_func($v) !!}
+                @else
+                    <th>{{ $v }}</th>
+                @endif
             @endif
         @endforeach
         @if($renderButtons)
