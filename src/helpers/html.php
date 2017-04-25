@@ -128,17 +128,18 @@ if (!function_exists('secure_request')) {
     }
 }
 
-if (!function_exists('build_like_query')) {
+if (!function_exists('like')) {
 
     /**
      * Surround keyword with '%', for a like query
      *
      * @param $q
+     * @param array $pattern
      * @return string
      */
-    function build_like_query($q)
+    function like($q, $pattern = ["%q%"])
     {
-        return '%' . $q . '%';
+        return str_replace("q", $q, $pattern);
     }
 }
 
