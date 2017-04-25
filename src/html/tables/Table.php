@@ -2,9 +2,9 @@
 
 namespace Leantony\Html\Tables;
 
-use Illuminate\Contracts\Support\Htmlable;
+use Leantony\html\AbstractHtml;
 
-abstract class Table implements Htmlable
+abstract class Table extends AbstractHtml
 {
     /**
      * @var array
@@ -42,6 +42,67 @@ abstract class Table implements Htmlable
     protected $data;
 
     /**
+     * @return bool
+     */
+    public function isPaginate()
+    {
+        return $this->paginate;
+    }
+
+    /**
+     * @param bool $paginate
+     */
+    public function setPaginate($paginate)
+    {
+        $this->paginate = $paginate;
+    }
+
+    public function __toString()
+    {
+        return $this->toHtml();
+    }
+
+    /**
+     * Get content as a string of HTML.
+     *
+     * @return string
+     */
+    public function toHtml()
+    {
+        return $this->render();
+    }
+
+    /**
+     * Render the view
+     *
+     * @return string
+     */
+    public function render()
+    {
+        return view('leantony::html.tables.table', $this->compactData())->render();
+    }
+
+    /**
+     * Specify the data to be sent to the view
+     *
+     * @return array
+     */
+    protected function compactData()
+    {
+        return [
+            'rows' => $this->getRows(),
+            'renderButtons' => $this->isRenderButtons(),
+            'data' => $this->getData(),
+            'paginate' => $this->paginate,
+            'rowsData' => $this->getRowsView(),
+            'viewButton' => new ViewButton(),
+            'deleteButton' => new DeleteButton(),
+            'dataVarAlias' => $this->getDataVariableName(),
+            'warnIfEmpty' => $this->isWarnIfEmpty()
+        ];
+    }
+
+    /**
      * Return the rows to be displayed on the table
      *
      * @return array
@@ -65,20 +126,32 @@ abstract class Table implements Htmlable
     }
 
     /**
-     * @return bool
+     * @return mixed
      */
-    public function isPaginate()
+    public function getData()
     {
-        return $this->paginate;
+        return $this->data;
     }
 
     /**
-     * @param bool $paginate
+     * @param mixed $data
      */
-    public function setPaginate($paginate)
+    public function setData($data)
     {
-        $this->paginate = $paginate;
+        $this->data = $data;
     }
+
+    /**
+     * Return the view that contains data in individual table rows
+     *
+     * @return string
+     */
+    abstract public function getRowsView();
+
+    /**
+     * @return string
+     */
+    abstract public function getDataVariableName();
 
     /**
      * @return bool
@@ -95,62 +168,4 @@ abstract class Table implements Htmlable
     {
         $this->warnIfEmpty = $warnIfEmpty;
     }
-
-    /**
-     * @return mixed
-     */
-    public function getData()
-    {
-        return $this->data;
-    }
-
-    /**
-     * @param mixed $data
-     */
-    public function setData($data)
-    {
-        $this->data = $data;
-    }
-
-    public function render()
-    {
-        return view('leantony::html.tables.table', [
-            'rows' => $this->getRows(),
-            'renderButtons' => $this->isRenderButtons(),
-            'data' => $this->getData(),
-            'paginate' => $this->paginate,
-            'rowsData' => $this->getRowsView(),
-            'viewButton' => new ViewButton(),
-            'deleteButton' => new DeleteButton(),
-            'dataVarAlias' => $this->getDataVariableName(),
-            'warnIfEmpty' => $this->isWarnIfEmpty()
-        ])->render();
-    }
-
-    /**
-     * Get content as a string of HTML.
-     *
-     * @return string
-     */
-    public function toHtml()
-    {
-        return $this->render();
-    }
-
-    public function __toString()
-    {
-        return $this->toHtml();
-    }
-
-    /**
-     * Return the view that contains data in individual table rows
-     *
-     * @return string
-     */
-    abstract public function getRowsView();
-
-    /**
-     * @return string
-     */
-    abstract public function getDataVariableName();
 }

@@ -2,31 +2,41 @@
 
 namespace Leantony\Html\Tables;
 
-use Illuminate\Contracts\Support\Htmlable;
+use Leantony\html\AbstractHtml;
 
-abstract class TableButton implements Htmlable
+abstract class TableButton extends AbstractHtml
 {
     /**
+     * The name of the button
+     *
      * @var string
      */
     protected $name;
 
     /**
+     * The url it goes to
+     *
      * @var string
      */
     protected $url;
 
     /**
+     * The tooltip title of the button
+     *
      * @var string
      */
     protected $title;
 
     /**
+     * If it launches a modal on click
+     *
      * @var bool
      */
     protected $launchesModal;
 
     /**
+     * If it triggers PJAX after the action is done. E.g updating
+     *
      * @var bool
      */
     protected $triggersPjax;
@@ -112,14 +122,6 @@ abstract class TableButton implements Htmlable
     }
 
     /**
-     * Render the button
-     *
-     * @param null $url
-     * @return string
-     */
-    abstract public function render($url = null);
-
-    /**
      * @return string
      */
     public function __toString()
@@ -136,4 +138,12 @@ abstract class TableButton implements Htmlable
     {
         return $this->render();
     }
+
+    /**
+     * Render the button
+     *
+     * @param null $url
+     * @return string
+     */
+    abstract public function render($url = null);
 }

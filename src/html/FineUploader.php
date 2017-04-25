@@ -2,9 +2,7 @@
 
 namespace Leantony\Html;
 
-use Illuminate\Contracts\Support\Htmlable;
-
-class FineUploader implements Htmlable
+class FineUploader extends AbstractHtml
 {
     /**
      * Multiple uploads
@@ -60,13 +58,56 @@ class FineUploader implements Htmlable
     public $dropAreaText = "You can also drop {files} here";
 
     /**
-     * Render the upload view
+     * @return mixed
+     */
+    public function getItemLimit()
+    {
+        return $this->itemLimit;
+    }
+
+    /**
+     * @param mixed $itemLimit
+     * @return FineUploader
+     */
+    public function setItemLimit($itemLimit)
+    {
+        $this->itemLimit = $itemLimit;
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->toHtml();
+    }
+
+    /**
+     * Get content as a string of HTML.
+     *
+     * @return string
+     */
+    public function toHtml()
+    {
+        return $this->render();
+    }
+
+    /**
+     * Render the view
      *
      * @return string
      */
     public function render()
     {
-        return view('leantony::html.upload_files', [
+        return view('leantony::html.upload_files', $this->compactData())->render();
+    }
+
+    /**
+     * Specify the data to be sent to the view
+     *
+     * @return array
+     */
+    protected function compactData()
+    {
+        return [
             'multiple' => $this->getMultiple(),
             'upload_rules' => json_encode($this->getUploadRules()),
             'itemLimit' => $this->getUploadRules()['itemLimit'],
@@ -75,28 +116,7 @@ class FineUploader implements Htmlable
             'auto_upload' => $this->getAutoUpload(),
             'drop_area_text' => $this->getDropAreaText(),
             'info_text' => $this->getInfoText(),
-        ])->render();
-    }
-
-    /**
-     * @return string
-     */
-    public function getDropAreaText()
-    {
-        if ($this->dropAreaText) {
-            return strtr($this->dropAreaText, ['{files}' => !$this->multiple ? 'a file' : 'files']);
-        }
-        return $this->dropAreaText;
-    }
-
-    /**
-     * @param string $dropAreaText
-     * @return FineUploader
-     */
-    public function setDropAreaText($dropAreaText)
-    {
-        $this->dropAreaText = $dropAreaText;
-        return $this;
+        ];
     }
 
     /**
@@ -142,24 +162,6 @@ class FineUploader implements Htmlable
     /**
      * @return mixed
      */
-    public function getItemLimit()
-    {
-        return $this->itemLimit;
-    }
-
-    /**
-     * @param mixed $itemLimit
-     * @return FineUploader
-     */
-    public function setItemLimit($itemLimit)
-    {
-        $this->itemLimit = $itemLimit;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getUploadEndpoint()
     {
         return $this->uploadEndpoint;
@@ -196,6 +198,27 @@ class FineUploader implements Htmlable
     /**
      * @return string
      */
+    public function getDropAreaText()
+    {
+        if ($this->dropAreaText) {
+            return strtr($this->dropAreaText, ['{files}' => !$this->multiple ? 'a file' : 'files']);
+        }
+        return $this->dropAreaText;
+    }
+
+    /**
+     * @param string $dropAreaText
+     * @return FineUploader
+     */
+    public function setDropAreaText($dropAreaText)
+    {
+        $this->dropAreaText = $dropAreaText;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function getInfoText()
     {
         if ($this->infoText) {
@@ -212,21 +235,5 @@ class FineUploader implements Htmlable
     {
         $this->infoText = $infoText;
         return $this;
-    }
-
-
-    /**
-     * Get content as a string of HTML.
-     *
-     * @return string
-     */
-    public function toHtml()
-    {
-        return $this->render();
-    }
-
-    public function __toString()
-    {
-        return $this->toHtml();
     }
 }

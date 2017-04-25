@@ -48,11 +48,22 @@ class UpdateButton extends TableButton
      */
     public function render($url = null)
     {
-        return view('leantony::html.tables.buttons.update', [
+        return view('leantony::html.tables.buttons.update', $this->compactData(func_get_args()))->render();
+    }
+
+    /**
+     * Specify the data to be sent to the view
+     *
+     * @param array $params
+     * @return array
+     */
+    protected function compactData($params = [])
+    {
+        return [
             'modal' => $this->isLaunchesModal(),
-            'url' => $this->getUrl() ?? $url,
+            'url' => $this->getUrl() ?? $params['url'],
             'title' => $this->getTitle(),
             'name' => $this->getName(),
-        ]);
+        ];
     }
 }

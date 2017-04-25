@@ -2,9 +2,7 @@
 
 namespace Leantony\Html;
 
-use Illuminate\Contracts\Support\Htmlable;
-
-class Select2 implements Htmlable
+class Select2 extends AbstractHtml
 {
     /**
      * Support tags
@@ -49,26 +47,6 @@ class Select2 implements Htmlable
     public $initialData = [];
 
     /**
-     * Render the select2 box
-     *
-     * @param array $smallSize
-     * @param array $largeSize
-     * @return string
-     */
-    public function render($smallSize = [4, 8], $largeSize = [2, 10])
-    {
-        return view('leantony::html.select2', [
-            'sm' => $smallSize,
-            'lg' => $largeSize,
-            'for' => $this->getFor(),
-            'name' => $this->getName(),
-            'data' => $this->getData(),
-            'data_values' => $this->getInitialData(),
-            'multiple' => $this->getIsMultiple(),
-        ])->render();
-    }
-
-    /**
      * @return bool
      */
     public function isTags()
@@ -84,6 +62,52 @@ class Select2 implements Htmlable
     {
         $this->tags = $tags;
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->toHtml();
+    }
+
+    /**
+     * Get content as a string of HTML.
+     *
+     * @return string
+     */
+    public function toHtml()
+    {
+        return $this->render();
+    }
+
+    /**
+     * Render the select2 box
+     *
+     * @param array $smallSize
+     * @param array $largeSize
+     * @return string
+     */
+    public function render($smallSize = [4, 8], $largeSize = [2, 10])
+    {
+        return view('leantony::html.select2', $this->compactData(func_get_args()))->render();
+    }
+
+    /**
+     * Specify the data to be sent to the view
+     *
+     * @param array $params
+     * @return array
+     */
+    protected function compactData($params = [])
+    {
+        return [
+            'sm' => $params['smallSize'],
+            'lg' => $params['largeSize'],
+            'for' => $this->getFor(),
+            'name' => $this->getName(),
+            'data' => $this->getData(),
+            'data_values' => $this->getInitialData(),
+            'multiple' => $this->getIsMultiple(),
+        ];
     }
 
     /**
@@ -145,24 +169,6 @@ class Select2 implements Htmlable
     /**
      * @return mixed
      */
-    public function getIsMultiple()
-    {
-        return $this->isMultiple ? 'multiple' : null;
-    }
-
-    /**
-     * @param mixed $isMultiple
-     * @return Select2
-     */
-    public function setIsMultiple($isMultiple)
-    {
-        $this->isMultiple = $isMultiple;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
     public function getInitialData()
     {
         return json_encode($this->initialData);
@@ -179,17 +185,20 @@ class Select2 implements Htmlable
     }
 
     /**
-     * Get content as a string of HTML.
-     *
-     * @return string
+     * @return mixed
      */
-    public function toHtml()
+    public function getIsMultiple()
     {
-        return $this->render();
+        return $this->isMultiple ? 'multiple' : null;
     }
 
-    public function __toString()
+    /**
+     * @param mixed $isMultiple
+     * @return Select2
+     */
+    public function setIsMultiple($isMultiple)
     {
-        return $this->toHtml();
+        $this->isMultiple = $isMultiple;
+        return $this;
     }
 }

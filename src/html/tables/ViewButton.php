@@ -25,6 +25,34 @@ class ViewButton extends TableButton
     protected $skipsPjax = false;
 
     /**
+     * Render the button
+     *
+     * @param null $url
+     * @return string
+     */
+    public function render($url = null)
+    {
+        return view('leantony::html.tables.buttons.view', $this->compactData(func_get_args()))->render();
+    }
+
+    /**
+     * Specify the data to be sent to the view
+     *
+     * @param array $params
+     * @return array
+     */
+    protected function compactData($params = [])
+    {
+        return [
+            'modal' => $this->isLaunchesModal(),
+            'url' => $this->getUrl() ?? $params['url'],
+            'title' => $this->getTitle(),
+            'name' => $this->getName(),
+            'pjax' => $this->isSkipsPjax()
+        ];
+    }
+
+    /**
      * @return bool
      */
     public function isSkipsPjax()
@@ -38,22 +66,5 @@ class ViewButton extends TableButton
     public function setSkipsPjax($skipsPjax)
     {
         $this->skipsPjax = $skipsPjax;
-    }
-
-    /**
-     * Render the button
-     *
-     * @param null $url
-     * @return string
-     */
-    public function render($url = null)
-    {
-        return view('leantony::html.tables.buttons.view', [
-            'modal' => $this->isLaunchesModal(),
-            'url' => $this->getUrl() ?? $url,
-            'title' => $this->getTitle(),
-            'name' => $this->getName(),
-            'pjax' => $this->isSkipsPjax()
-        ]);
     }
 }
