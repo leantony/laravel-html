@@ -7,21 +7,29 @@ use Leantony\html\AbstractHtml;
 abstract class Table extends AbstractHtml
 {
     /**
+     * The rows that appear on the table $k => $v
+     *
      * @var array
      */
     protected $rows = [];
 
     /**
+     * The name of the variable sent to the loop view
+     *
      * @var string
      */
     protected $dataVariableAlias;
 
     /**
+     * The view that holds the loop data
+     *
      * @var string
      */
-    protected $rowsView;
+    public $rowsView;
 
     /**
+     * Render buttons on the table
+     *
      * @var bool
      */
     protected $renderButtons = true;
@@ -85,16 +93,17 @@ abstract class Table extends AbstractHtml
     /**
      * Specify the data to be sent to the view
      *
+     * @param array $params
      * @return array
      */
-    protected function compactData()
+    protected function compactData($params = [])
     {
         return [
             'rows' => $this->getRows(),
             'renderButtons' => $this->isRenderButtons(),
             'data' => $this->getData(),
             'paginate' => $this->paginate,
-            'rowsData' => $this->getRowsView(),
+            'rowsData' => $this->rowsView ?? $this->getRowsView(),
             'viewButton' => new ViewButton(),
             'deleteButton' => new DeleteButton(),
             'dataVarAlias' => $this->getDataVariableName(),
