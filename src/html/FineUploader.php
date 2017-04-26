@@ -97,15 +97,16 @@ class FineUploader extends AbstractHtml
      */
     public function render()
     {
-        return view('leantony::html.upload_files', $this->compactData())->render();
+        return view('leantony::html.upload_files', $this->compactData(func_get_args()))->render();
     }
 
     /**
      * Specify the data to be sent to the view
      *
+     * @param array $params
      * @return array
      */
-    protected function compactData()
+    protected function compactData($params = [])
     {
         return [
             'multiple' => $this->getMultiple(),
