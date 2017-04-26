@@ -158,6 +158,9 @@ abstract class Table extends AbstractHtml
     abstract public function getRowsView();
 
     /**
+     * Specify the data variable sent to the loop view
+     * This will be used within the loop view to access the data
+     *
      * @return string
      */
     abstract public function getDataVariableName();
