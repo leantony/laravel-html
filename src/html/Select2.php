@@ -99,15 +99,16 @@ class Select2 extends AbstractHtml
      */
     protected function compactData($params = [])
     {
-        return [
-            'sm' => $params['smallSize'],
-            'lg' => $params['largeSize'],
+        $data = [
+            'sm' => $params[0],
+            'lg' => $params[1],
             'for' => $this->getFor(),
             'name' => $this->getName(),
             'data' => $this->getData(),
             'data_values' => $this->getInitialData(),
             'multiple' => $this->getIsMultiple(),
         ];
+        return array_merge($data, $this->getExtraParams());
     }
 
     /**

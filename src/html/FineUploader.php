@@ -108,16 +108,17 @@ class FineUploader extends AbstractHtml
      */
     protected function compactData($params = [])
     {
-        return [
+        $data = [
             'multiple' => $this->getMultiple(),
             'upload_rules' => json_encode($this->getUploadRules()),
-            'itemLimit' => $this->getUploadRules()['itemLimit'],
-            'size_limit' => $this->getUploadRules()['sizeLimit'],
+            'itemLimit' => array_get($this->getUploadRules(), 'itemLimit', 1),
+            'size_limit' => array_get($this->getUploadRules(), 'sizeLimit', 2097152),
             'upload_endpoint' => $this->getUploadEndpoint(),
             'auto_upload' => $this->getAutoUpload(),
             'drop_area_text' => $this->getDropAreaText(),
             'info_text' => $this->getInfoText(),
         ];
+        return array_merge($data, $this->getExtraParams());
     }
 
     /**

@@ -5,16 +5,22 @@ namespace Leantony\Html\Tables;
 class ViewButton extends TableButton
 {
     /**
+     * If the view button should launch a modal
+     *
      * @var bool
      */
     protected $launchesModal = false;
 
     /**
+     * The name of the button
+     *
      * @var string
      */
     protected $name = 'View';
 
     /**
+     * The tooltip title
+     *
      * @var string
      */
     protected $title = 'View Item';
@@ -43,13 +49,14 @@ class ViewButton extends TableButton
      */
     protected function compactData($params = [])
     {
-        return [
+        $data = [
             'modal' => $this->isLaunchesModal(),
             'url' => $this->getUrl() ?? $params[0],
             'title' => $this->getTitle(),
             'name' => $this->getName(),
             'pjax' => $this->isSkipsPjax()
         ];
+        return array_merge($data, $this->getExtraParams());
     }
 
     /**

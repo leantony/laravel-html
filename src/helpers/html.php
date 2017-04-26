@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Route;
 
 if (!function_exists('map')) {
 
@@ -54,6 +54,21 @@ if (!function_exists('bool_options')) {
     }
 }
 
+if (!function_exists('gender_options')) {
+
+    /**
+     * Gender options
+     *
+     * @return array
+     */
+    function gender_options()
+    {
+        return [
+            'male' => 'Male',
+            'female' => 'Female'
+        ];
+    }
+}
 if (!function_exists('bool_to_str')) {
 
     /**

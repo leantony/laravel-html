@@ -40,13 +40,14 @@ class DeleteButton extends TableButton
      */
     protected function compactData($params = [])
     {
-        return [
+        $data = [
             'name' => $this->getName(),
             'title' => $this->getTitle(),
             'pjax' => $this->isTriggersPjax(),
             'pjaxTarget' => $this->getPjaxTarget(),
             'url' => $this->getUrl() ?? $params[0],
         ];
+        return array_merge($data, $this->getExtraParams());
     }
 
     public function isTriggersPjax()

@@ -45,9 +45,9 @@ class SelectAjax extends Select2
      */
     protected function compactData($params = [])
     {
-        return [
-            'sm' => $params['smallSize'],
-            'lg' => $params['largeSize'],
+        $data = [
+            'sm' => $params[0],
+            'lg' => $params[1],
             'for' => $this->getFor(),
             'name' => $this->getName(),
             'data' => $this->getData(),
@@ -58,6 +58,7 @@ class SelectAjax extends Select2
             'url' => $this->getTargetUrl(),
             'tags' => $this->isTags(),
         ];
+        return array_merge($data, $this->getExtraParams());
     }
 
     /**

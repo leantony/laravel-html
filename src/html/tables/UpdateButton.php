@@ -59,11 +59,12 @@ class UpdateButton extends TableButton
      */
     protected function compactData($params = [])
     {
-        return [
+        $data = [
             'modal' => $this->isLaunchesModal(),
             'url' => $this->getUrl() ?? $params[0],
             'title' => $this->getTitle(),
             'name' => $this->getName(),
         ];
+        return array_merge($data, $this->getExtraParams());
     }
 }

@@ -35,16 +35,22 @@ abstract class Table extends AbstractHtml
     protected $renderButtons = true;
 
     /**
+     * If pagination should be done
+     *
      * @var bool
      */
     protected $paginate = true;
 
     /**
+     * Display a warning message if there is no data
+     *
      * @var bool
      */
     protected $warnIfEmpty = true;
 
     /**
+     * Data that will be sent to the view
+     *
      * @var mixed
      */
     protected $data;
@@ -91,6 +97,14 @@ abstract class Table extends AbstractHtml
     }
 
     /**
+     * @return array
+     */
+    public function getExtraParams()
+    {
+        return $this->extraParams;
+    }
+
+    /**
      * Specify the data to be sent to the view
      *
      * @param array $params
@@ -98,7 +112,7 @@ abstract class Table extends AbstractHtml
      */
     protected function compactData($params = [])
     {
-        return [
+        $data = [
             'rows' => $this->getRows(),
             'renderButtons' => $this->isRenderButtons(),
             'data' => $this->getData(),
@@ -109,6 +123,7 @@ abstract class Table extends AbstractHtml
             'dataVarAlias' => $this->getDataVariableName(),
             'warnIfEmpty' => $this->isWarnIfEmpty()
         ];
+        return array_merge($data, $this->getExtraParams());
     }
 
     /**
