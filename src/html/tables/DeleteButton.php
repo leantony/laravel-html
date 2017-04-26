@@ -45,7 +45,7 @@ class DeleteButton extends TableButton
             'title' => $this->getTitle(),
             'pjax' => $this->isTriggersPjax(),
             'pjaxTarget' => $this->getPjaxTarget(),
-            'url' => $this->getUrl() ?? $params['$url'],
+            'url' => $this->getUrl() ?? $params[0],
         ];
     }
 

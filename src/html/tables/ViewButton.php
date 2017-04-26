@@ -45,7 +45,7 @@ class ViewButton extends TableButton
     {
         return [
             'modal' => $this->isLaunchesModal(),
-            'url' => $this->getUrl() ?? $params['url'],
+            'url' => $this->getUrl() ?? $params[0],
             'title' => $this->getTitle(),
             'name' => $this->getName(),
             'pjax' => $this->isSkipsPjax()
