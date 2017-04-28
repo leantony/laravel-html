@@ -199,10 +199,15 @@ if (!function_exists('active')) {
      * @param bool $checkQueryString
      * @return null|string
      */
-    function active($route, $checkQueryString = false)
+    function active($route, $checkQueryString = false, $null = false)
     {
         if ($checkQueryString) {
             $queryString = Request::getQueryString();
+            if ($null) {
+                if ($queryString === null) {
+                    return 'active';
+                }
+            }
             if ($queryString !== null) {
                 return str_contains($queryString, $route) ? 'active' : null;
             }
