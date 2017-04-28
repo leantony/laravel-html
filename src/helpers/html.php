@@ -197,6 +197,7 @@ if (!function_exists('active')) {
      *
      * @param $route
      * @param bool $checkQueryString
+     * @param bool $null
      * @return null|string
      */
     function active($route, $checkQueryString = false, $null = false)
