@@ -52,7 +52,7 @@ class DeleteButton extends TableButton
 
     public function isTriggersPjax()
     {
-        return $this->pjaxTarget ? parent::isTriggersPjax() : false;
+        return $this->pjaxTarget ? true : parent::isTriggersPjax();
     }
 
     /**
