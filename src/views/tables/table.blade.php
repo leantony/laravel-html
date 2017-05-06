@@ -3,12 +3,20 @@
     <tr>
         @foreach($rows as $k => $v)
             @if($loop->first)
-                <th class="min-width nowrap">{{ $v }}</th>
-            @else
-                @if(is_callable($v))
-                    {!! call_user_func($v) !!}
+                @if(!is_array($v))
+                    <th class="min-width nowrap">{{ $v }}</th>
                 @else
+                    <th class="min-width nowrap" {{ !array_get($v, 'sort') ? null : "data-sort=$k" }}>
+                        {{ array_get($v, 'label', 'specify label!') }}
+                    </th>
+                @endif
+            @else
+                @if(!is_array($v))
                     <th>{{ $v }}</th>
+                @else
+                    <th {{ array_get($v, 'sort', false) ? null : "data-sort=$k" }}>
+                        {{ array_get($v, 'label', 'specify label!') }}
+                    </th>
                 @endif
             @endif
         @endforeach

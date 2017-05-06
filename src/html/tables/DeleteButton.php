@@ -6,6 +6,7 @@ class DeleteButton extends TableButton
 {
     /**
      * The target PJAX element to be refreshed after delete
+     * Leave null to disable pjax
      *
      * @var string
      */

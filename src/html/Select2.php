@@ -5,6 +5,13 @@ namespace Leantony\Html;
 class Select2 extends AbstractHtml
 {
     /**
+     * Help text
+     *
+     * @var string
+     */
+    public $helpText = 'Begin typing to select a value';
+
+    /**
      * Support tags
      *
      * @var bool
@@ -64,6 +71,24 @@ class Select2 extends AbstractHtml
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getHelpText()
+    {
+        return $this->helpText;
+    }
+
+    /**
+     * @param string $helpText
+     * @return $this
+     */
+    public function setHelpText(string $helpText)
+    {
+        $this->helpText = $helpText;
+        return $this;
+    }
+
     public function __toString()
     {
         return $this->toHtml();
@@ -107,6 +132,7 @@ class Select2 extends AbstractHtml
             'data' => $this->getData(),
             'data_values' => $this->getInitialData(),
             'multiple' => $this->getIsMultiple(),
+            'helpText' => $this->getHelpText(),
         ];
         return array_merge($data, $this->getExtraParams());
     }
