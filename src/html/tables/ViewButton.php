@@ -28,7 +28,7 @@ class ViewButton extends TableButton
     /**
      * @var bool
      */
-    protected $skipsPjax = false;
+    protected $enforcesPjax = false;
 
     /**
      * Render the button
@@ -54,7 +54,7 @@ class ViewButton extends TableButton
             'url' => $this->getUrl() ?? $params[0],
             'title' => $this->getTitle(),
             'name' => $this->getName(),
-            'pjax' => $this->isSkipsPjax()
+            'pjax' => $this->isEnforcesPjax()
         ];
         return array_merge($data, $this->getExtraParams());
     }
@@ -62,16 +62,16 @@ class ViewButton extends TableButton
     /**
      * @return bool
      */
-    public function isSkipsPjax()
+    public function isEnforcesPjax()
     {
-        return $this->skipsPjax;
+        return $this->enforcesPjax;
     }
 
     /**
-     * @param bool $skipsPjax
+     * @param bool $enforcesPjax
      */
-    public function setSkipsPjax($skipsPjax)
+    public function setEnforcesPjax($enforcesPjax)
     {
-        $this->skipsPjax = $skipsPjax;
+        $this->enforcesPjax = $enforcesPjax;
     }
 }
