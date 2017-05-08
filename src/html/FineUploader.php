@@ -12,6 +12,14 @@ class FineUploader extends AbstractHtml
     public $multiple = true;
 
     /**
+     * Define if a pjax container should be reloaded after upload
+     * Leave null to disable PJAX
+     *
+     * @var string
+     */
+    public $pjaxTarget = null;
+
+    /**
      * Upload rules
      *
      * @var array
@@ -75,6 +83,24 @@ class FineUploader extends AbstractHtml
         return $this;
     }
 
+    /**
+     * @return string
+     */
+    public function getPjaxTarget()
+    {
+        return $this->pjaxTarget;
+    }
+
+    /**
+     * @param string $pjaxTarget
+     * @return FineUploader
+     */
+    public function setPjaxTarget(string $pjaxTarget)
+    {
+        $this->pjaxTarget = $pjaxTarget;
+        return $this;
+    }
+
     public function __toString()
     {
         return $this->toHtml();
@@ -117,6 +143,7 @@ class FineUploader extends AbstractHtml
             'auto_upload' => $this->getAutoUpload(),
             'drop_area_text' => $this->getDropAreaText(),
             'info_text' => $this->getInfoText(),
+            'pjax_target' => $this->getPjaxTarget()
         ];
         return array_merge($data, $this->getExtraParams());
     }

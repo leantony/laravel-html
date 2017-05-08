@@ -95,6 +95,7 @@
     </div>
 </script>
 <div id="upload-data"
+     data-pjax-target="{{ $pjax_target or null }}"
      data-waiting-path="{{ bower('fine-uploader/dist/placeholders/waiting-generic.png') }}"
      data-not-available="{{ bower('fine-uploader/dist/placeholders/not_available-generic.png') }}"
      data-upload-endpoint="{{ $upload_endpoint }}" data-rules="{{ $upload_rules }}"
@@ -107,6 +108,8 @@
     var el = $("#upload-data");
     var token = $('meta[name="csrf-token"]').attr('content');
     var singleNotification = el.data('single-notification') || true;
+    var pjaxTarget = el.data('pjax-target') || false;
+
     el.fineUploader({
         template: 'qq-template-validation',
         request: {
@@ -131,15 +134,20 @@
         },
         callbacks: {
             onDeleteComplete: function (id, xhr, isError) {
+                if(pjaxTarget){
+                    $.pjax.reload({container: pjaxTarget});
+                }
                 leantony.notify({type: isError ? 'error' : 'success', text: xhr.responseText})
             },
             onComplete: function (id, name, responseJson, xhr) {
-                console.log(xhr);
                 if (!singleNotification) {
                     if (responseJson.success) {
                         leantony.notify({type: 'success', text: responseJson.message || 'File uploaded successfully'});
                         if (responseJson.reloadPage) {
                             leantony.utils.loadLink(location.href, 1000);
+                        }
+                        if(pjaxTarget){
+                            $.pjax.reload({container: pjaxTarget});
                         }
                     } else {
                         leantony.notify({
@@ -152,6 +160,9 @@
             onAllComplete: function (succeeded, failed) {
                 if (succeeded.length) {
                     leantony.notify({type: 'success', text: succeeded.length + 'file(s) were uploaded successfully'});
+                    if(pjaxTarget){
+                        $.pjax.reload({container: pjaxTarget});
+                    }
                 } else {
                     leantony.notify({type: 'error', text: failed.length + 'file(s) failed to upload.'});
                 }
