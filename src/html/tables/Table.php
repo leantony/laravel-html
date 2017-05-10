@@ -7,11 +7,11 @@ use Leantony\Html\AbstractHtml;
 abstract class Table extends AbstractHtml
 {
     /**
-     * The link for sorting
+     * The route name for sorting
      *
      * @var string
      */
-    protected $sortUrl = null;
+    protected $sortRouteName = null;
 
     /**
      * HTML Classes for the table
@@ -137,17 +137,17 @@ abstract class Table extends AbstractHtml
     /**
      * @return string
      */
-    public function getSortUrl()
+    public function getSortRouteName()
     {
-        return $this->sortUrl;
+        return $this->sortRouteName;
     }
 
     /**
-     * @param string $sortUrl
+     * @param string $sortRouteName
      */
-    public function setSortUrl($sortUrl)
+    public function setSortRouteName($sortRouteName)
     {
-        $this->sortUrl = $sortUrl;
+        $this->sortRouteName = $sortRouteName;
     }
 
     /**
@@ -168,7 +168,7 @@ abstract class Table extends AbstractHtml
             'deleteButton' => new DeleteButton(),
             'dataVarAlias' => $this->getDataVariableName(),
             'warnIfEmpty' => $this->isWarnIfEmpty(),
-            'sortUrl' => $this->getSortUrl(),
+            'sortRouteName' => $this->getSortRouteName(),
             'tableClasses' => $this->getTableClasses()
         ];
         return array_merge($data, $this->getExtraParams());
