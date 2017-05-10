@@ -60,6 +60,6 @@
 </table>
 @if($paginate)
     <div class="center">
-        {{ $data->links() }}
+        {{ $data->appends(request()->query())->render() }}
     </div><!-- /.center -->
 @endif
