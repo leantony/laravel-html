@@ -8,7 +8,7 @@
                     <th class="min-width nowrap">{{ $v }}</th>
                 @else
                     @if($sort = array_get($v, 'sort', false))
-                        <a href="{{ url($sortUrl) }}">
+                        <a href="{{ url($sortUrl, ['sort_by' => $k]) }}">
                             <th class="min-width nowrap">
                                 {{ array_get($v, 'label', 'specify label!') }}
                             </th>
@@ -25,7 +25,7 @@
                     <th>{{ $v }}</th>
                 @else
                     @if($sort = array_get($v, 'sort', false))
-                        <a href="{{ url($sortUrl) }}">
+                        <a href="{{ url($sortUrl, ['sort_by' => $k]) }}">
                             <th>
                                 {{ array_get($v, 'label', 'specify label!') }}
                             </th>
