@@ -1,22 +1,40 @@
-<table class="table table-simple">
+<table class="{{ $tableClasses }}">
     <thead>
     <tr>
         @foreach($rows as $k => $v)
+
             @if($loop->first)
                 @if(!is_array($v))
                     <th class="min-width nowrap">{{ $v }}</th>
                 @else
-                    <th class="min-width nowrap" {{ !array_get($v, 'sort') ? null : "data-sort=$k" }}>
-                        {{ array_get($v, 'label', 'specify label!') }}
-                    </th>
+                    @if($sort = array_get($v, 'sort', false))
+                        <a href="{{ url($sortUrl) }}">
+                            <th class="min-width nowrap">
+                                {{ array_get($v, 'label', 'specify label!') }}
+                            </th>
+                        </a>
+                    @else
+                        <th class="min-width nowrap">
+                            {{ array_get($v, 'label', 'specify label!') }}
+                        </th>
+                    @endif
+
                 @endif
             @else
                 @if(!is_array($v))
                     <th>{{ $v }}</th>
                 @else
-                    <th {{ array_get($v, 'sort', false) ? null : "data-sort=$k" }}>
-                        {{ array_get($v, 'label', 'specify label!') }}
-                    </th>
+                    @if($sort = array_get($v, 'sort', false))
+                        <a href="{{ url($sortUrl) }}">
+                            <th>
+                                {{ array_get($v, 'label', 'specify label!') }}
+                            </th>
+                        </a>
+                    @else
+                        <th>
+                            {{ array_get($v, 'label', 'specify label!') }}
+                        </th>
+                    @endif
                 @endif
             @endif
         @endforeach

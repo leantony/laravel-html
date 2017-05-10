@@ -7,6 +7,20 @@ use Leantony\Html\AbstractHtml;
 abstract class Table extends AbstractHtml
 {
     /**
+     * The link for sorting
+     *
+     * @var string
+     */
+    protected $sortUrl = null;
+
+    /**
+     * HTML Classes for the table
+     *
+     * @var string
+     */
+    protected $tableClasses = 'table table-simple table-hover';
+
+    /**
      * The rows that appear on the table $k => $v
      *
      * @var array
@@ -71,6 +85,22 @@ abstract class Table extends AbstractHtml
         $this->paginate = $paginate;
     }
 
+    /**
+     * @return string
+     */
+    public function getTableClasses()
+    {
+        return $this->tableClasses;
+    }
+
+    /**
+     * @param string $tableClasses
+     */
+    public function setTableClasses($tableClasses)
+    {
+        $this->tableClasses = $tableClasses;
+    }
+
     public function __toString()
     {
         return $this->toHtml();
@@ -105,6 +135,22 @@ abstract class Table extends AbstractHtml
     }
 
     /**
+     * @return string
+     */
+    public function getSortUrl()
+    {
+        return $this->sortUrl;
+    }
+
+    /**
+     * @param string $sortUrl
+     */
+    public function setSortUrl($sortUrl)
+    {
+        $this->sortUrl = $sortUrl;
+    }
+
+    /**
      * Specify the data to be sent to the view
      *
      * @param array $params
@@ -121,7 +167,9 @@ abstract class Table extends AbstractHtml
             'viewButton' => new ViewButton(),
             'deleteButton' => new DeleteButton(),
             'dataVarAlias' => $this->getDataVariableName(),
-            'warnIfEmpty' => $this->isWarnIfEmpty()
+            'warnIfEmpty' => $this->isWarnIfEmpty(),
+            'sortUrl' => $this->getSortUrl(),
+            'tableClasses' => $this->getTableClasses()
         ];
         return array_merge($data, $this->getExtraParams());
     }
