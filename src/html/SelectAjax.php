@@ -5,6 +5,20 @@ namespace Leantony\Html;
 class SelectAjax extends Select2
 {
     /**
+     * Specify if the AJAX request needs caching
+     *
+     * @var bool
+     */
+    public $cache = true;
+
+    /**
+     * Help text
+     *
+     * @var string
+     */
+    public $helpText = 'start typing to search for a value';
+
+    /**
      * The key attribute to be used as <option id={id} value={}>
      *
      * @var string
@@ -57,8 +71,29 @@ class SelectAjax extends Select2
             'valueAttribute' => $this->getValueAttribute(),
             'url' => $this->getTargetUrl(),
             'tags' => $this->isTags(),
+            'cache' => $this->isCache(),
+            'triggerTarget' => $this->getTriggerElement(),
+            'triggerSearchKey' => $this->getTriggerSelectKey(),
+            'triggerSearchValue' => $this->getTriggerSelectValue(),
+            'triggerLink' => $this->getTriggerSelectLink()
         ];
         return array_merge($data, $this->getExtraParams());
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCache()
+    {
+        return $this->cache;
+    }
+
+    /**
+     * @param bool $cache
+     */
+    public function setCache($cache)
+    {
+        $this->cache = $cache;
     }
 
     /**

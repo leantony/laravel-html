@@ -54,6 +54,36 @@ class Select2 extends AbstractHtml
     public $initialData = [];
 
     /**
+     * The element to be triggered an on 'change' event, when an item is selected
+     *
+     * @var string
+     */
+    public $triggerElement = null;
+
+    /**
+     * The route name/url to which an AJAX request shall be sent when the value on the
+     * select box is selected
+     *
+     * @var string
+     */
+    public $triggerSelectLink = null;
+
+    /**
+     * The key to be mapped to a value when the ajax query runs
+     *
+     * @var string
+     */
+    public $triggerSelectKey = 'id';
+
+    /**
+     * The value to be mapped to a corresponding request value when the
+     * ajax query runs
+     *
+     * @var string
+     */
+    public $triggerSelectValue = 'name';
+
+    /**
      * @return bool
      */
     public function isTags()
@@ -87,6 +117,70 @@ class Select2 extends AbstractHtml
     {
         $this->helpText = $helpText;
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTriggerElement(): string
+    {
+        return $this->triggerElement;
+    }
+
+    /**
+     * @param string $triggerElement
+     */
+    public function setTriggerElement(string $triggerElement)
+    {
+        $this->triggerElement = $triggerElement;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTriggerSelectLink(): string
+    {
+        return $this->triggerSelectLink;
+    }
+
+    /**
+     * @param string $triggerSelectLink
+     */
+    public function setTriggerSelectLink(string $triggerSelectLink)
+    {
+        $this->triggerSelectLink = $triggerSelectLink;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTriggerSelectKey(): string
+    {
+        return $this->triggerSelectKey;
+    }
+
+    /**
+     * @param string $triggerSelectKey
+     */
+    public function setTriggerSelectKey(string $triggerSelectKey)
+    {
+        $this->triggerSelectKey = $triggerSelectKey;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTriggerSelectValue(): string
+    {
+        return $this->triggerSelectValue;
+    }
+
+    /**
+     * @param string $triggerSelectValue
+     */
+    public function setTriggerSelectValue(string $triggerSelectValue)
+    {
+        $this->triggerSelectValue = $triggerSelectValue;
     }
 
     public function __toString()
@@ -133,6 +227,10 @@ class Select2 extends AbstractHtml
             'data_values' => $this->getInitialData(),
             'multiple' => $this->getIsMultiple(),
             'helpText' => $this->getHelpText(),
+            'triggerTarget' => $this->getTriggerElement(),
+            'triggerSearchKey' => $this->getTriggerSelectKey(),
+            'triggerSearchValue' => $this->getTriggerSelectValue(),
+            'triggerLink' => $this->getTriggerSelectLink()
         ];
         return array_merge($data, $this->getExtraParams());
     }
