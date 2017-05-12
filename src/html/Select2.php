@@ -113,7 +113,7 @@ class Select2 extends AbstractHtml
      * @param string $helpText
      * @return $this
      */
-    public function setHelpText(string $helpText)
+    public function setHelpText($helpText)
     {
         $this->helpText = $helpText;
         return $this;
@@ -122,7 +122,7 @@ class Select2 extends AbstractHtml
     /**
      * @return string
      */
-    public function getTriggerElement(): string
+    public function getTriggerElement()
     {
         return $this->triggerElement;
     }
@@ -130,7 +130,7 @@ class Select2 extends AbstractHtml
     /**
      * @param string $triggerElement
      */
-    public function setTriggerElement(string $triggerElement)
+    public function setTriggerElement($triggerElement)
     {
         $this->triggerElement = $triggerElement;
     }
@@ -138,7 +138,7 @@ class Select2 extends AbstractHtml
     /**
      * @return string
      */
-    public function getTriggerSelectLink(): string
+    public function getTriggerSelectLink()
     {
         return $this->triggerSelectLink;
     }
@@ -146,7 +146,7 @@ class Select2 extends AbstractHtml
     /**
      * @param string $triggerSelectLink
      */
-    public function setTriggerSelectLink(string $triggerSelectLink)
+    public function setTriggerSelectLink($triggerSelectLink)
     {
         $this->triggerSelectLink = $triggerSelectLink;
     }
@@ -154,7 +154,7 @@ class Select2 extends AbstractHtml
     /**
      * @return string
      */
-    public function getTriggerSelectKey(): string
+    public function getTriggerSelectKey()
     {
         return $this->triggerSelectKey;
     }
@@ -162,7 +162,7 @@ class Select2 extends AbstractHtml
     /**
      * @param string $triggerSelectKey
      */
-    public function setTriggerSelectKey(string $triggerSelectKey)
+    public function setTriggerSelectKey($triggerSelectKey)
     {
         $this->triggerSelectKey = $triggerSelectKey;
     }
@@ -170,7 +170,7 @@ class Select2 extends AbstractHtml
     /**
      * @return string
      */
-    public function getTriggerSelectValue(): string
+    public function getTriggerSelectValue()
     {
         return $this->triggerSelectValue;
     }
@@ -178,7 +178,7 @@ class Select2 extends AbstractHtml
     /**
      * @param string $triggerSelectValue
      */
-    public function setTriggerSelectValue(string $triggerSelectValue)
+    public function setTriggerSelectValue($triggerSelectValue)
     {
         $this->triggerSelectValue = $triggerSelectValue;
     }
