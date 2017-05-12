@@ -72,6 +72,7 @@ class SelectAjax extends Select2
             'url' => $this->getTargetUrl(),
             'tags' => $this->isTags(),
             'cache' => $this->isCache(),
+            'helpText' => $this->getHelpText(),
             'triggerTarget' => $this->getTriggerElement(),
             'triggerSearchKey' => $this->getTriggerSelectKey(),
             'triggerSearchValue' => $this->getTriggerSelectValue(),
