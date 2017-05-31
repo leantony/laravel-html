@@ -111,24 +111,6 @@ if (!function_exists('valid_instance')) {
     }
 }
 
-if (!function_exists('curr')) {
-    /**
-     * Format currency
-     *
-     * @param $amount
-     * @param null $curr
-     * @return string
-     */
-    function curr($amount, $curr = null)
-    {
-        // default to KSH
-        $currency = $curr === null ? 'KSH' : $curr;
-        // use this one, instead of the NumberFormatter
-        // the extension is always missing in most systems
-        return $currency . ' ' . number_format($amount, 2);
-    }
-}
-
 if (!function_exists('secure_request')) {
 
     /**
@@ -187,33 +169,5 @@ if (!function_exists('bower')) {
     function bower($file_path)
     {
         return a('vendor/bower/' . $file_path);
-    }
-}
-
-if (!function_exists('active')) {
-
-    /**
-     * Return 'active' as a class for an element based on routename/query string
-     *
-     * @param $route
-     * @param bool $checkQueryString
-     * @param bool $null
-     * @return null|string
-     */
-    function active($route, $checkQueryString = false, $null = false)
-    {
-        if ($checkQueryString) {
-            $queryString = Request::getQueryString();
-            if ($null) {
-                if ($queryString === null) {
-                    return 'active';
-                }
-            }
-            if ($queryString !== null) {
-                return str_contains($queryString, $route) ? 'active' : null;
-            }
-            return null;
-        }
-        return Route::currentRouteName() === $route ? 'active' : null;
     }
 }

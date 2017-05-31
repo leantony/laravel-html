@@ -11,7 +11,7 @@
                 data-use-cache="{{ $cache }}"
                 data-trigger-target="{{ $triggerTarget or null }}"
                 data-trigger-search-key="{{ $triggerSearchKey or 'id' }}"
-                data-trigger-search-key="{{ $triggerSearchValue or 'name' }}"
+                data-trigger-search-value="{{ $triggerSearchValue or 'name' }}"
                 data-trigger-href="{{ $triggerLink or null }}">
             @foreach(json_decode($data) as $key => $value)
                 <option id="{{ $key }}">{{ $value }}</option>
